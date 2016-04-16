@@ -1,0 +1,21 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+
+    "isolatedModules": false,
+    "module": "system",
+    "noImplicitAny": true,
+    "noLib": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "suppressImplicitAnyIndexErrors": true,
+
+    "target": "es6"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,140 @@
+﻿.penny {
+    height: 52.32px;
+    width: 52.32px;
+}
+
+.nickel {
+    height: 58.26px;
+    width: 58.26px;
+}
+
+.dime {
+    height: 49.19px;
+    width: 49.19px;
+}
+
+.quarter {
+    height: 66.67px;
+    width: 66.67px;
+}
+
+.xl {
+    font-size:x-large;
+}
+
+.xxl {
+    font-size:xx-large;
+}
+
+.onRight {
+    text-align: right;
+}
+
+.coinDiv {
+    height: 70px;
+}
+
+.popup{
+    position:fixed;
+    width:30%;
+    height:auto;
+    margin:-10% auto auto -15%;
+    top:30%;
+    left:50%;
+    background:white;
+    text-align:center;
+    color:#111;
+    border: 1px solid black;
+    z-index: 100;
+    padding: 50px;
+}
+
+.popup.correct {
+    width:40%;
+    margin:-10% auto auto -20%;
+    border: 3px solid rgb(5,120,0);
+}
+
+.popup span {
+    font-size: xx-large;
+}
+
+.highScore {
+    border: 1px solid gray;
+}
+.highScore td {
+    border-bottom: 1px solid lightgray;
+    padding: 2px;
+    font-size: large;
+}
+.highScore tr:last-child td {
+    border-bottom: 1px solid gray;
+}
+.highScore tr td:first-child {
+    text-align: center;
+}
+.highScore tr td:last-child {
+    text-align: right;
+}
+
+.btn {
+    border: 1px solid black;
+}
+
+.btn-coin:disabled {
+    visibility: hidden;
+}
+
+.btn-lg-wide {
+    padding: 16px 50px;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.flyIn {
+    -moz-animation-duration: 0.5s;
+    -o-animation-duration: 0.5s;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -moz-animation-name: FlyIn;
+    -o-animation-name: FlyIn;
+    -webkit-animation-name: FlyIn;
+    animation-name: FlyIn;
+}
+
+@-moz-keyframes FlyIn {
+    from {
+        -moz-transform: scale(0);
+        transform: scale(0);
+    }
+    to {
+        -moz-transform: scale(100%);
+        transform: scale(100%);
+    }
+}
+
+@-webkit-keyframes FlyIn {
+    from {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    to {
+        -webkit-transform: scale(100%);
+        transform: scale(100%);
+    }
+}
+
+@keyframes FlyIn {
+    from {
+          transform: scale(0);
+    }
+    to {
+        transform: scale(100%);
+    }
+}

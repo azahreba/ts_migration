@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coin Counter</title>
+    <link href="Content/yeti-bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/app.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="container">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-header">
+                <span class="navbar-brand">Coin Counter</span>
+            </div>
+            <ul class="nav navbar-nav">
+                <li role="presentation" data-bind="class: newGameButtonClass"><a href="#" data-bind="click: setGameVisible, text: newGameButtonText"></a></li>
+                <li role="presentation" data-bind="class: highScoresButtonClass"><a href="#" data-bind="click: setHighScoreVisible">High Scores</a></li>
+                <li role="presentation" data-bind="class: aboutButtonClass"><a href="#" data-bind="click: setAboutPageVisible">About</a></li>
+                <li role="presentation"><a href="#" data-bind="click: unitTestsButtonClick">Unit Tests</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="container" data-bind="visible: gameVisible()">
+        <div class="row">
+            <div class="col-md-5 xxl" data-bind="text: whatTheUserShouldBeDoing()"></div>
+            <div class="col-md-3 xxl">
+                <span data-bind="text: gameClock.timeRemainingFormatted"></span>
+                <button class="btn btn-lg btn-info" data-bind="click: resumeGame, enable: isPaused(), visible: isPaused()">Resume</button>
+                <button class="btn btn-md" data-bind="click: pauseGame, enable: canBePaused(), visible: canBePaused()">Pause</button>
+            </div>
+            <div class="col-md-4 xl" data-bind="text: scoreText() "></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"><hr /></div>
+        </div>
+        <div data-bind="foreach: coins">
+            <div class="row">
+                <div class="col-md-2">
+                    <span class="xl" data-bind="text: name"></span>
+                </div>
+                <div class="col-md-2 unselectable">
+                    <button class="btn btn-lg btn-coin glyphicon glyphicon-minus" data-bind="click: $parent.removeCoin, enable: $parent.removeCoinEnabled($data)"></button>
+                    <button class="btn btn-lg btn-coin glyphicon glyphicon-plus" data-bind="click: $parent.addCoin, enable: $parent.addCoinEnabled($data)"></button>
+                </div>
+                <div class="col-md-1">
+                    <span class="xxl" data-bind="text: count"></span>
+                </div>
+                <div class="col-md-7 coinDiv" data-bind="attr: {id: $parent.destinationDivIDForCoin($data)}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <button class="btn btn-primary btn-lg btn-lg-wide" data-bind="click: checkForVictory, enable: buttonsEnabled()">Go</button>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="nameModal" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Welcome to Coin Counter</h4>
+                </div>
+                <div class="modal-body">
+                    <span data-bind="text:playerNameQuestion"></span>
+                    <input id="playerNameInput" type="text" data-bind="value: playerName" />
+                    <button id="playerNameOK" data-dismiss="modal" role="button" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="gameOverModal" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Game Over!</h4>
+                </div>
+                <div class="modal-body">
+                    <div data-bind="html: endOfGameMessage"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bind="click: startBrandNewGame" data-dismiss="modal">Play again!</button>
+                    <button class="btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="popup" id="splash" tabindex="-1" role="dialog" data-bind="visible: statusMessageVisible">
+            <span data-bind="html: statusMessage"></span>
+        </div>
+    </section>
+    <section class="container" data-bind="visible: highScoreVisible()">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <h1>High Scores</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>Place</td>
+                            <td>Name</td>
+                            <td>Score</td>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: highScoreList.List">
+                        <tr>
+                            <td data-bind="text: ($index() + 1)"></td>
+                            <td data-bind="text: name"></td>
+                            <td data-bind="text: score"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="container" data-bind="visible: aboutVisible">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Coin Counter Game</h1>
+                <p>Written by Steve Ognibene for Pluralsight, 2015</p>
+                <p>Images of U.S. coins included in this game are sourced from Wikimedia.org, and are in the public domain.</p>
+            </div>
+        </div>
+    </section>
+    <script src="Built/vendor.js"></script>
+    <!-- <script src="globals.js"></script>
+    <script src="app.ts"></script>
+    <script src="coins.js"></script>
+    <script src="gameclock.js"></script>
+    <script src="HighScore.js"></script>
+    <script src="coincounterviewmodel.js"></script>
+    <script src="index.js"></script>-->
+    <script src="Built/coinCounter.min.js"></script>
+
+</body>
+</html>

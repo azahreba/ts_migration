@@ -1,0 +1,17 @@
+{
+  "name": "CoinCounterGame",
+  "version": "1.0.0",
+  "description": "CoinCounterGame for Pluralsight",
+  "main": "index.html",
+  "devDependencies": {
+    "qunitjs": "^1.16.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Pluralsight"
+  ],
+  "author": "Steve Ognibene",
+  "license": "Pluralsight"
+}
