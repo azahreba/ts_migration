@@ -33,7 +33,8 @@ if (QUnit) {
         gc.start();
         setTimeout(function () {
             var secRemaining = gc.secondsRemaining();
-            assert.ok((secRemaining == (startSeconds - secondsToRun) || secRemaining == (startSeconds - secondsToRun - 1)), "expected " + secondsToRun + " or " + (secondsToRun + 1) + " seconds to have run off the GameClock.");
+            assert.ok((secRemaining == (startSeconds - secondsToRun) ||
+                secRemaining == (startSeconds - secondsToRun - 1)), "expected " + secondsToRun + " or " + (secondsToRun + 1) + " seconds to have run off the GameClock.");
             assert.strictEqual(gc.isRunning(), true, "expected GameClock to still be running.");
             gc.reset();
             assert.strictEqual(gc.secondsRemaining(), startSeconds, "expected reset to set seconds remaining to initial value.");

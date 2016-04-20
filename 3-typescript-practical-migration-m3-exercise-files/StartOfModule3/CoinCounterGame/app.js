@@ -13,4 +13,4 @@ var app = {
         { name: "Charlie", score: 9 }
     ]
 };
-//# sourceMappingURL=app.ts.map
+//# sourceMappingURL=app.js.map
