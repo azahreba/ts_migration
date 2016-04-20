@@ -2,6 +2,8 @@ class Coin {
     imgSrc: string;
     count: KnockoutObservable<number>;
     max: KnockoutObservable<number>;
+    addCoinEnabled: KnockoutComputed<boolean>;
+    removeCoinEnabled: KnockoutComputed<boolean>;
     constructor(public name: string,
                 public style: string,
                 public value: BigJsLibrary.BigJS,

@@ -1,4 +1,4 @@
-﻿var CoinCounterViewModel;
+﻿var CoinCounterViewModel: () => void;
 
 CoinCounterViewModel = function () {
     "use strict";
@@ -16,7 +16,11 @@ CoinCounterViewModel = function () {
         $("#gameOverModal").modal('show');
     };
     self.highScoreList = ko.observableArray(app.starterHighScoreList);
-    self.tryPushHighScore = function (theScore) {
+    interface IScore {
+        name: string;
+        score: number;
+    }
+    self.tryPushHighScore = function (theScore: IScore) {
         var hsl = self.highScoreList();
         if (theScore.score === 0) {
             return -1;
@@ -65,13 +69,13 @@ CoinCounterViewModel = function () {
             "Score: " + self.score() :
             self.playerName() + "'s score: " + self.score();
     });
-    self.imageElementName = function (coinName, zeroBasedIndex) {
+    self.imageElementName = function (coinName: string, zeroBasedIndex: number) {
         return "img" + spacesToUnderscore(coinName) + String(zeroBasedIndex);
     };
     self.buttonsEnabled = ko.computed(function () {
         return !self.isPaused() && self.gameClock.isRunning();
     });
-    self.addCoin = function (coin) {
+    self.addCoin = function (coin: Coin) {
         if (coin.count() === coin.max()) {
             return;
         }
@@ -84,10 +88,10 @@ CoinCounterViewModel = function () {
         var destinationDiv = document.getElementById(self.destinationDivIDForCoin(coin));
         destinationDiv.appendChild(newCoin);
     };
-    self.destinationDivIDForCoin = function (coin) {
+    self.destinationDivIDForCoin = function (coin: Coin) {
         return "draw" + spacesToUnderscore(coin.name);
     };
-    self.removeCoin = function (coin) {
+    self.removeCoin = function (coin: Coin) {
         if (coin.count() === 0) {
             return;
         }
@@ -108,13 +112,13 @@ CoinCounterViewModel = function () {
     };
     self.calculateTotal = function () {
         var total = Big(0);
-        this.coins.forEach(function (coin) {
+        this.coins.forEach(function (coin: Coin) {
             total = total.plus(coin.value.times(coin.count()));
         });
         return total;
     };
     self.checkForVictory = function () {
-        var message;
+        var message: string;
         if (this.calculateTotal().eq(this.goalAmount())) {
             this.gameClock.stop();
             this.score(this.score() + app.pointsForCorrect);
@@ -225,7 +229,7 @@ CoinCounterViewModel = function () {
         }
         var response = confirm("Do you want to run the unit tests?\nThis will cancel any current game and forget your high scores.");
         if (response) {
-            window.location = "tests/tests.html";
+            window.location.href = "tests/tests.html";
         }
     };
     self.newGameButtonText = ko.computed(function () {
@@ -239,7 +243,7 @@ CoinCounterViewModel = function () {
         // add computeds to coins (which reference vm)
         (function () {
             for (var i = 0; i < coins.length; i += 1) {
-                (function (coin) {
+                (function (coin: Coin) {
                     coin.addCoinEnabled = ko.computed(function () {
                         return self.buttonsEnabled() && (coin.count() < coin.max());
                     });
@@ -272,7 +276,7 @@ CoinCounterViewModel = function () {
     };
 };
 
-function spacesToUnderscore(inputString) {
+function spacesToUnderscore(inputString: string) {
     return inputString.replace(/ /g, '_');
 }
 
