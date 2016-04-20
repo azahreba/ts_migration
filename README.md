@@ -1,4 +1,4 @@
-Code Examples for Practical TypeScript Migration
+**Code Examples for Practical TypeScript Migration**
 ================================================
 
 StartOfModule2/
